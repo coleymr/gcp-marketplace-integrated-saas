@@ -24,8 +24,8 @@ PROJECT_IAM_PAGE = 'https://console.cloud.google.com/iam-admin/iam?project={}'
 PROJECT_PUBSUB_PAGE = 'https://console.cloud.google.com/apis/library/pubsub.googleapis.com?project={}'
 
 TOPIC_PROJECT = 'cloudcommerceproc-prod'
-TOPIC_NAME_PREFIX = 'DEMO-'
-SUBSCRIPTION_NAME = 'codelab'
+TOPIC_NAME_PREFIX = os.environ.get('PROJECT_PREFIX', 'DEMO-')
+SUBSCRIPTION_NAME = os.environ.get('PUBSUB_SUBSCRIPTION', 'codelab')
 
 
 def main(argv):
@@ -52,9 +52,11 @@ def main(argv):
         'PERMISSION DENIED: Check that the Pub/Sub API is '
         'enabled in your project and that your service '
         'account was granted the Pub/Sub Editor role. \n'
+        'Topic Path: %s \n'
         'Check API status at: %s \n'
         'Check IAM roles at: %s '
         % (
+            topic_path,
             PROJECT_PUBSUB_PAGE.format(PROJECT_ID),
             PROJECT_IAM_PAGE.format(PROJECT_ID),
         )

@@ -24,9 +24,10 @@ from google.cloud import pubsub_v1
 
 from impl.database.database import JsonDatabase
 
-PROJECT_ID = os.environ['GOOGLE_CLOUD_PROJECT']
+PROJECT_PREFIX = os.environ.get('PROJECT_ID_PREFIX', 'DEMO-')
+PROJECT_ID = PROJECT_PREFIX + os.environ['GOOGLE_CLOUD_PROJECT']
 
-PUBSUB_SUBSCRIPTION = 'codelab'
+PUBSUB_SUBSCRIPTION = os.environ.get('PUBSUB_SUBSCRIPTION', 'codelab')
 
 PROCUREMENT_API = 'cloudcommerceprocurement'
 
@@ -48,7 +49,7 @@ class Procurement(object):
     ##########################
 
     def _get_account_name(self, account_id):
-        return 'providers/DEMO-{}/accounts/{}'.format(PROJECT_ID,
+        return 'providers/{}/accounts/{}'.format(PROJECT_ID,
                                                       account_id)
 
     def get_account(self, account_id):
