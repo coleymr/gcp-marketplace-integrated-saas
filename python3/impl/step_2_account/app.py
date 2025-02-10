@@ -24,7 +24,7 @@ from google.cloud import pubsub_v1
 
 from impl.database.database import JsonDatabase
 
-PROJECT_PREFIX = os.environ.get('PROJECT_ID_PREFIX', 'DEMO-')
+PROJECT_PREFIX = os.environ.get('PROJECT_PREFIX', 'DEMO-')
 PROJECT_ID = PROJECT_PREFIX + os.environ['GOOGLE_CLOUD_PROJECT']
 
 PUBSUB_SUBSCRIPTION = os.environ.get('PUBSUB_SUBSCRIPTION', 'codelab')
